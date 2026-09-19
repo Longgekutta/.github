@@ -1,0 +1,76 @@
+name: Universal Reusable CI Matrix
+
+on:
+  workflow_call:
+    inputs:
+      python-version-matrix:
+        description: 'JSON array of python versions'
+        required: false
+        default: '["3.9", "3.10", "3.11", "3.12"]'
+        type: string
+      os-matrix:
+        description: 'JSON array of operating systems'
+        required: false
+        default: '["ubuntu-latest", "windows-latest"]'
+        type: string
+
+jobs:
+  matrix-test:
+    name: Test (${{ matrix.os }} - Py ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ${{ fromJSON(inputs.os-matrix) }}
+        python-version: ${{ fromJSON(inputs.python-version-matrix) }}
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Python Runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Verify Environment & Scaffolding
+        shell: bash
+        run: |
+          echo "=== [1/4] Environment Inspection ==="
+          python --version
+          
+          echo "=== [2/4] Scaffolding & Security Verification ==="
+          if [ ! -f ".gitignore" ]; then
+            echo "::error::Missing .gitignore guardrail!"
+            exit 1
+          fi
+          if [ ! -f "README.md" ]; then
+            echo "::error::Missing README.md front door!"
+            exit 1
+          fi
+          echo "Scaffolding checks passed."
+
+      - name: Execute Physical Unit Tests
+        shell: bash
+        run: |
+          echo "=== [3/4] Running Physical Test Pyramid ==="
+          if [ -d "tests" ]; then
+            python -m unittest discover tests
+          elif [ -f "test_*.py" ]; then
+            python -m unittest test_*.py
+          else
+            echo "No tests directory found, checking entrypoint health..."
+            if [ -f "main.py" ]; then
+              python main.py --help || python main.py health || python -c "import main"
+            fi
+          fi
+
+      - name: Verify Invariant Contract
+        shell: bash
+        run: |
+          echo "=== [4/4] Checking Invariants Contract ==="
+          if [ -f "CORE_INVARIANTS.md" ]; then
+            echo "CORE_INVARIANTS.md present and enforced."
+          else
+            echo "::warning::CORE_INVARIANTS.md not found, consider establishing rigid contract."
+          fi

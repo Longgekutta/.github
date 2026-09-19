@@ -1,0 +1,38 @@
+name: "🐛 Defect / Invariant Violation Report"
+description: File a bug report or invariant violation in any fleet repository
+title: "[BUG]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! All fleet repositories adhere to strict first-principles engineering and the UTEO Meta-Model.
+  - type: input
+    id: affected_component
+    attributes:
+      label: Affected Component / Repository
+      placeholder: e.g. tool-code-optima, spec-ai-engineering
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Exact Reproduction Command or Script
+      placeholder: |
+        run.ps1 test
+        # or python main.py audit ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior vs Observed Reality
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Invariant Verification
+      options:
+        - label: I confirm this report does not contain any leaked credentials, real API keys, or private tokens.
+          required: true

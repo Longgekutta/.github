@@ -1,0 +1,27 @@
+name: Universal Reusable Release
+
+on:
+  workflow_call:
+    inputs:
+      tag-name:
+        description: 'Git tag name for release'
+        required: true
+        type: string
+
+jobs:
+  create-release:
+    name: Publish GitHub Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Generate Changelog & Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag-name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
