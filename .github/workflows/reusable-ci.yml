@@ -6,7 +6,7 @@ on:
       python-version-matrix:
         description: 'JSON array of python versions'
         required: false
-        default: '["3.9", "3.10", "3.11", "3.12"]'
+        default: '["3.10", "3.11", "3.12"]'
         type: string
       os-matrix:
         description: 'JSON array of operating systems'
@@ -14,15 +14,20 @@ on:
         default: '["ubuntu-latest", "windows-latest"]'
         type: string
 
+
 jobs:
   matrix-test:
     name: Test (${{ matrix.os }} - Py ${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
     strategy:
       fail-fast: false
       matrix:
         os: ${{ fromJSON(inputs.os-matrix) }}
         python-version: ${{ fromJSON(inputs.python-version-matrix) }}
+
 
     steps:
       - name: Checkout Codebase
