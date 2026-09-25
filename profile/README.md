@@ -65,7 +65,7 @@ Antigravity 体系通过严格的数学导数阶梯进行分层治理，彻底�
 
 ---
 
-## 🛠️ The Fleet: 5 Specs & 17 Tools (全域母港矩阵)
+## 🛠️ The Fleet: 5 Specs & 18 Tools (全域母港矩阵)
 
 ### 1. 规范宪法体系 (Specifications)
 - 📜 **[spec-omni-project](https://github.com/Longgekutta/spec-omni-project)**: 空间静态宪法、目录护栏与统一通用 5 动词接口。
@@ -82,6 +82,7 @@ Antigravity 体系通过严格的数学导数阶梯进行分层治理，彻底�
 - 🌊 **[tool-interagent-cascade](https://github.com/Longgekutta/tool-interagent-cascade)**: 多智能体强类型上下文封套传输与调度。
 - 🛰️ **[tool-fleet-sentinel](https://github.com/Longgekutta/tool-fleet-sentinel)**: 全域资产巡航哨兵、反老好人 45 分熔断大盘。
 - 📡 **[tool-omniscout-radar](https://github.com/Longgekutta/tool-omniscout-radar)**: 全球顶级开源动态雷达扫描与 SOTA 情报对标。
+- 📚 **[tool-citation-optima](https://github.com/Longgekutta/tool-citation-optima)**: 全域文档引用、技术溯源与决策依据极限优化引擎（五维量规打标 / 有机融合注水 / CITATION.cff 机器账本）。
 - ⚡ **[tool-prefix-aligner](https://github.com/Longgekutta/tool-prefix-aligner)**: 4阶提示词前缀刚性对齐器（保证 Cache 命中率 $\ge 85\%$）。
 - 🧬 **[tool-token-distiller](https://github.com/Longgekutta/tool-token-distiller)**: 多轮上下文谱系无损蒸馏与防注意力稀释。
 - 🎯 **[tool-model-tier-sorter](https://github.com/Longgekutta/tool-model-tier-sorter)**: 任务复杂度感知与参谋模型分级路由保护器。
